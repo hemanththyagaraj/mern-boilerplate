@@ -35,8 +35,11 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new ESLintWebpackPlugin({
       extensions: ['js', 'jsx'],
+      quiet: true,
       failOnError: true,
-      emitError: true,
+      failOnWarning: false,
+      emitError: false,
+      emitWarning: false,
     }),
   ],
   performance: {
