@@ -6,7 +6,7 @@ module.exports = {
   target: 'node',
   mode: 'development',
   externals: [nodeExternals()],
-  entry: `${cwd}/server/app.js`,
+  entry: `${cwd}/server/server.js`,
   output: {
     filename: 'server.build.js',
     path: `${cwd}/dist`,

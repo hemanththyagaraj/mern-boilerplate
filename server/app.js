@@ -1,12 +1,15 @@
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
 
-app.use('/', (req, res) => {
+app.use(morgan('dev'));
+
+app.use('/api/v1/users', (req, res) => {
   res.status(200).json({
     status: 'successs',
     message: 'Successfully received the reques',
   });
 });
 
-app.listen(8080);
+module.exports = app;
