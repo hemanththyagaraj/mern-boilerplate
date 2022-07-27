@@ -8,11 +8,9 @@ const config = require('./config/config');
 
 const connectToDB = async () => {
   try {
-    console.log(config.mongoUri);
     await mongoose.connect(config.mongoUri);
     console.log('Successfully connected to the database');
   } catch (error) {
-    console.log(error);
     console.log('Failed to connect to the database');
   }
 };

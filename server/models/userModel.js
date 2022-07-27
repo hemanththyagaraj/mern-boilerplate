@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 const constants = require('../utils/constants');
 
 const UserSchema = new mongoose.Schema({
@@ -19,13 +20,16 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: [true, 'Please provide a password'],
+    minlength: [8, 'Password must be minimum 8 characters long'],
   },
   confirmPassword: {
     type: String,
     required: true,
     validate: {
-      validator: (val) => this.password !== val,
+      validator(val) {
+        return this.password === val;
+      },
       message: 'Passwords do not match',
     },
   },
@@ -38,6 +42,22 @@ const UserSchema = new mongoose.Schema({
     default: Date.now(),
   },
 });
+
+UserSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
+
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(this.password, salt);
+  this.password = hash;
+  this.confirmPassword = undefined;
+
+  return next();
+});
+
+UserSchema.methods.correctPassword = async function (candidatePassword, hashedPassword) {
+  const isMatch = await bcrypt.compare(candidatePassword, hashedPassword);
+  return isMatch;
+};
 
 const User = mongoose.model('User', UserSchema);
 
