@@ -18,6 +18,7 @@
         "react"
     ],
     "rules": {
-        "import/no-import-module-exports": "Off"
+        "import/no-import-module-exports": "Off",
+        "no-debugger": "warn"
     }
 }

@@ -1,7 +1,9 @@
 const environments = require('../utils/environments');
 
+console.log(process.env);
+
 const config = {
-  port: process.env.PORT || 8080,
+  port: process.env.REACT_APP_BACKEND_SERVER_PORT || 8000,
   env: process.env.NODE_ENV || environments.development,
   jwtSecret: process.env.JWT_SECRET || 'THIS_IS_DEVELOPMENT_JWT_DUMMY_SECRET',
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || '1d',
