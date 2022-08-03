@@ -9,6 +9,10 @@ class ApiInstance {
     return this.axiosInstance.get('/api/v1/users');
   }
 
+  signUp(payload) {
+    return this.axiosInstance.post('/api/v1/users/signup', payload);
+  }
+
   logout() {
     return this.axiosInstance.get('/api/v1/logout');
   }

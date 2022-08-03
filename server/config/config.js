@@ -1,7 +1,5 @@
 const environments = require('../utils/environments');
 
-console.log(process.env);
-
 const config = {
   port: process.env.REACT_APP_BACKEND_SERVER_PORT || 8000,
   env: process.env.NODE_ENV || environments.development,

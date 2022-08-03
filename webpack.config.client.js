@@ -6,8 +6,7 @@ const dotenv = require('dotenv');
 
 const currentDirectory = __dirname || process.cwd();
 
-module.exports = (env) => {
-  console.log(env);
+module.exports = () => {
   const dotenvConfig = dotenv.config({
     path: `${__dirname}/config.env`,
   }).parsed;
