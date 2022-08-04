@@ -5,6 +5,7 @@ import { getBaseUrl } from '../helpers/helpers';
 const axiosInstance = axios.create({
   baseURL: getBaseUrl(constants.SERVER_PORT),
   timeout: constants.REQUEST_TIMEOUT,
+  withCredentials: true,
 });
 
 axiosInstance.interceptors.response.use((response) => response, (error) => {
