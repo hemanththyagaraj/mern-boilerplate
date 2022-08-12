@@ -7,13 +7,30 @@ import Api from './apis/api';
 function App() {
   const handleClick = async () => {
     try {
-      const res = await Api.signUp({
+      await Api.signUp({
         name: 'hemanth',
         email: 'hemanththyagaraj@gmail.com',
         password: '!Hemanth@859',
         confirmPassword: '!Hemanth@859',
       });
-      console.log(res, 'dataaaa');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleGetAllUsers = async () => {
+    try {
+      const response = await Api.getAllUsers();
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await Api.logout();
+      window.history.replaceState(null, '', '/logout');
     } catch (error) {
       console.log(error);
     }
@@ -22,7 +39,9 @@ function App() {
   return (
     <div>
       <h1>{process.env.REACT_APP_CLIENT_SERVER_PORT}</h1>
-      <button type="button" onClick={handleClick}>Click me</button>
+      <button type="button" onClick={handleClick}>Register</button>
+      <button type="button" onClick={handleGetAllUsers}>Get all users</button>
+      <button type="button" onClick={handleLogout}>Logout</button>
       <Dashboard />
     </div>
   );

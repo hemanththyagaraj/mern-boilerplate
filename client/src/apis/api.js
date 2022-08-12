@@ -14,7 +14,7 @@ class ApiInstance {
   }
 
   logout() {
-    return this.axiosInstance.get('/api/v1/logout');
+    return this.axiosInstance.get('/api/v1/users/signout');
   }
 }
 

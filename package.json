@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack serve --env ENVIRONMENT=DEVELOPMENT serve --config webpack.config.client.js",
     "start-server": "nodemon",
-    "build": "webpack --env ENVIRONMENT=PRODUCTION --config webpack.config.client.production.js"
+    "build": "webpack --env ENVIRONMENT=PRODUCTION --config webpack.config.client.production.js",
+    "inspect": "node --inspect-brk server/server.js"
   },
   "dependencies": {
     "axios": "^0.27.2",

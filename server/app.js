@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
 const userRouter = require('./routes/userRoutes');
+const { globalErrorHandler } = require('./controllers/errorController');
 
 const app = express();
 
@@ -22,5 +23,8 @@ app.use('/api/v1/logout', (req, res) => {
 });
 
 app.use('/api/v1/users', userRouter);
+
+// global error handling middleware
+app.use(globalErrorHandler);
 
 module.exports = app;
