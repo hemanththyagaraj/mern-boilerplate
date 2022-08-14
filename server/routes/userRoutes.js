@@ -1,6 +1,6 @@
 const express = require('express');
 const { signUp, protect, signOut } = require('../controllers/authController');
-const { getAllUsers } = require('../controllers/usersController');
+const { getAllUsers, getUser } = require('../controllers/usersController');
 
 const router = express.Router();
 
@@ -10,5 +10,8 @@ router.get('/signout', signOut);
 
 router.route('/')
   .get(protect, getAllUsers);
+
+router.route('/:id')
+  .get(getUser);
 
 module.exports = router;
