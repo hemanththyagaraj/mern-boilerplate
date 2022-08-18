@@ -16,12 +16,6 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use('/api/v1/logout', (req, res) => {
-  res.status(401).json({
-    status: 'fail',
-  });
-});
-
 app.use('/api/v1/users', userRouter);
 
 // global error handling middleware

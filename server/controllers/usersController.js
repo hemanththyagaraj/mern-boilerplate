@@ -20,3 +20,8 @@ exports.getUser = catchAsync(async (req, res) => {
     },
   });
 });
+
+exports.deleteUser = catchAsync(async (req, res) => {
+  await User.findByIdAndDelete(req.params.id);
+  res.status(204).json();
+});
