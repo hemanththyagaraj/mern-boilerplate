@@ -50,9 +50,27 @@ exports.signOut = catchAsync(async (req, res) => {
   });
 });
 
+exports.signIn = catchAsync(async (req, res, next) => {
+  const { email, password } = req.body;
+
+  // check if the user has passed both email and password
+  if (!email || !password) return next(new AppError('Please provide both email and password!', 400));
+
+  // if the user has passed non existing password
+  const user = await User.findOne({ email }).select('+password');
+
+  // check if user provided password and password stored in db matches
+  const isMatch = await user.correctPassword(password, user.password);
+
+  if (!isMatch) return next(new AppError('Password entered in incorrect!', 400));
+
+  user.password = undefined;
+
+  createAndSendToken(user, 200, req, res);
+});
+
 exports.protect = catchAsync(async (req, res, next) => {
   const { cookies, headers } = req;
-
   // 1. extract the token
   let token;
   if (cookies[jwtTokenKey]) {
